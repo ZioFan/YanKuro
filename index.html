@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YanKuro</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: black;
+      color: #C085FD;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    h1 {
+      text-align: center;
+      color: #C085FD;
+      text-shadow: 0 0 10px #C085FD;
+    }
+
+    .sub-title {
+      text-align: center;
+      font-size: 18px;
+      opacity: 0.8;
+    }
+
+    h2 {
+      color: #C085FD;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 100px auto 40px;
+    }
+
+    .section {
+      border: 2px solid #C085FD;
+      padding: 15px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      animation: slideUp 1s ease forwards;
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      border: 2px solid #C085FD;
+      border-radius: 10px;
+      animation: neonBorderMove 3s linear infinite;
+    }
+
+    @keyframes neonBorderMove {
+      0% { left: -100%; }
+      50% { left: 100%; }
+      100% { left: -100%; }
+    }
+
+    @keyframes slideUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .typing-effect {
+      font-weight: bold;
+      font-size: 20px;
+      color: #C085FD;
+      min-height: 30px;
+      border-right: 2px solid #C085FD;
+      white-space: nowrap;
+      overflow: hidden;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .game-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .game-list li {
+      display: flex;
+      align-items: center;
+      background-color: #222;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .game-list li:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 10px #C085FD;
+    }
+
+    .game-list img {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .game-info {
+      flex-grow: 1;
+      margin-left: 10px;
+    }
+
+    button {
+      background-color: #C085FD;
+      color: black;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    button:hover {
+      background-color: #A05EDC;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #111;
+      color: white;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+
+    .social-links a {
+      color: #C085FD;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      text-decoration: underline;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(15, 5, 30, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid #C085FD;
+      z-index: 1000;
+      box-shadow: 0 0 20px #C085FD40;
+    }
+
+    .nav-container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 24px;
+      color: #C085FD;
+      text-decoration: none;
+      font-weight: bold;
+      text-shadow: 0 0 10px #C085FD;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-menu li a {
+      color: #ffffff;
+      font-weight: 500;
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-menu li a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0%;
+      height: 2px;
+      background-color: #C085FD;
+      transition: width 0.3s ease;
+    }
+
+    .nav-menu li a:hover {
+      color: #C085FD;
+    }
+
+    .nav-menu li a:hover::after {
+      width: 100%;
+    }
+
+    .nav-toggle {
+      display: none;
+      font-size: 30px;
+      color: #C085FD;
+      cursor: pointer;
+    }
+
+    @media (max-width: 700px) {
+      .nav-menu {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #1a0e2a;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px 0;
+        transform: translateY(-150%);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .nav-menu.active {
+        transform: translateY(0);
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">YanKuro</a>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#about-me">About Me</a></li>
+        <li><a href="#games">Games</a></li>
+        <li><a href="https://github.com/YanKuro12" target="_blank">GitHub Repo</a></li>
+      </ul>
+      <div class="nav-toggle" id="nav-toggle">&#9776;</div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <header>
+      <h1>YanKuro</h1>
+      <p class="sub-title">Student | Developer | Gamer</p>
+      <div class="typing-effect" id="typing-text"></div>
+    </header>
+
+    <section id="about-me" class="section">
+      <h2>About Me</h2>
+      <p>Hi, gw YanKuro biasa dipanggil Yan. Gw adalah seorang pelajar SMP yang suka coding dan main game seru.</p>
+    </section>
+
+    <section id="games" class="section">
+      <h2>Game yang Gue Mainkan</h2>
+      <ul class="game-list">
+        <li onclick="window.open('https://play.google.com/store/apps/details?id=com.mobile.legends')">
+          <img src="https://upload.wikimedia.org/wikipedia/en/5/5a/MobileLegendsBangBang.jpg" alt="Mobile Legends">
+          <div class="game-info">
+            <h3>Mobile Legends</h3>
+            <p>MOBA seru untuk main bareng teman.</p>
+          </div>
+          <button onclick="event.stopPropagation(); window.open('https://play.google.com/store/apps/details?id=com.mobile.legends')">Main</button>
+        </li>
+        <li onclick="window.open('https://play.google.com/store/apps/details?id=com.activision.callofduty.shooter')">
+          <img src="https://upload.wikimedia.org/wikipedia/en/0/05/Call_of_Duty_Mobile.jpg" alt="Call of Duty">
+          <div class="game-info">
+            <h3>Call of Duty</h3>
+            <p>FPS intens dengan mode multiplayer keren.</p>
+          </div>
+          <button onclick="event.stopPropagation(); window.open('https://play.google.com/store/apps/details?id=com.activision.callofduty.shooter')">Main</button>
+        </li>
+        <li onclick="window.open('https://play.google.com/store/apps/details?id=com.rtsoft.growtopia')">
+          <img src="https://upload.wikimedia.org/wikipedia/en/c/c5/Growtopia_Logo.png" alt="Growtopia">
+          <div class="game-info">
+            <h3>Growtopia</h3>
+            <p>Game sandbox seru buat bikin dunia sendiri.</p>
+          </div>
+          <button onclick="event.stopPropagation(); window.open('https://play.google.com/store/apps/details?id=com.rtsoft.growtopia')">Main</button>
+        </li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 YanKuro. All Rights Reserved.</p>
+      <div class="social-links">
+        <a href="https://www.tiktok.com/@YanzLzGT" target="_blank">TikTok</a> |
+        <a href="https://github.com/YanKuro12" target="_blank">GitHub</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    navToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Typing effect logic
+    const typingText = document.getElementById("typing-text");
+    const words = ["Pelajar", "Developer", "Gamer", "Growtopia Fan", "Javascript Enjoyer"];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function type() {
+      const currentWord = words[wordIndex];
+      const currentText = currentWord.substring(0, charIndex);
+      typingText.textContent = currentText;
+
+      if (!isDeleting && charIndex < currentWord.length) {
+        charIndex++;
+        setTimeout(type, 100);
+      } else if (isDeleting && charIndex > 0) {
+        charIndex--;
+        setTimeout(type, 50);
+      } else {
+        isDeleting = !isDeleting;
+        if (!isDeleting) wordIndex = (wordIndex + 1) % words.length;
+        setTimeout(type, 1000);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", type);
+  </script>
+</body>
+</html>

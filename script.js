@@ -7,7 +7,7 @@ navToggle.addEventListener('click', () => {
 
 // Typing effect logic
 const typingText = document.getElementById("typing-text");
-const words = ["Pelajar", "Developer", "Gamer", "Growtopia Fan", "Javascript Enjoyer"];
+const words = ["HTML", "CSS", "PHP", "C++", "C#", "Javascript", "Python", "SQL", "GO"];
 let wordIndex = 0;
 let charIndex = 0;
 let isDeleting = false;

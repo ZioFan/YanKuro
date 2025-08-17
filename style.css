@@ -68,7 +68,7 @@ h2 {
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 10px;
-  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  transition: box-shadow 0.3s, background 0.3s;
   cursor: pointer;
   animation: fadeInUp 1s ease forwards;
   opacity: 0;
@@ -100,7 +100,7 @@ button {
   border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
-  transition: background 0.3s, transform 0.3s;
+  transition: background 0.3s;
 }
 
 button:hover {
